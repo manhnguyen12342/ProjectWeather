@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-e-plo7u@jipap&puo=-)(2(b4s=pzoe_67gu^6zr@9!4%p+l7)
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+WEATHER_API_URL = 'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric'
 
 # Application definition
 
@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'weather',
-    
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
