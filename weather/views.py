@@ -16,14 +16,12 @@ class WeatherAPIView(APIView):
         data = response.json()
         
         temperature = data['main']['temp']
-        humidity = data['main']['humidity']
-        # air_quality = 'Not Available'  
+        humidity = data['main']['humidity'] 
         
         weather_data = {
              'city' : city,
             'temperature': temperature,
             'humidity': humidity,
-            # 'air_quality': str(air_quality),  # Convert to string or another suitable format
         }
         serializer = WeatherDataSerializer(data=weather_data)
         serializer.is_valid(raise_exception=True)
