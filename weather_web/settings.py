@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 WEATHER_API_URL = 'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric'
-
+API_KEYS = '909371832c6e088cee2b8ae9553bb388'
 # Application definition
 
 INSTALLED_APPS = [

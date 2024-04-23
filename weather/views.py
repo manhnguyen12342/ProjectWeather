@@ -8,7 +8,7 @@ from django.conf import settings
 
 class WeatherAPIView(APIView):
     def get(self, request):
-        api_key = '909371832c6e088cee2b8ae9553bb388'
+        api_key = settings.API_KEYS.format( )
         city = 'Hanoi'
         url = settings.WEATHER_API_URL.format(city=city, api_key=api_key)
         
@@ -27,22 +27,5 @@ class WeatherAPIView(APIView):
         }
         serializer = WeatherDataSerializer(data=weather_data)
         serializer.is_valid(raise_exception=True)
-    # def post(self, request):
-    #     serializer = WeatherDataSerializer(data=request.data)
-    #     if serializer.is_valid():
-    #         data = serializer.validated_data
-    #         warnings = []
-
-    #         # Kiểm tra nhiệt độ
-    #         if data['temperature'] > 35:
-    #             warnings.append("Cảnh báo: Nhiệt độ cao.")
-    #         elif data['temperature'] < 5:
-    #             warnings.append("Cảnh báo: Nhiệt độ thấp.")
-
-    #         if data['humidity'] > 80:
-    #             warnings.append("Cảnh báo: Độ ẩm cao.")
-
-
-    #         # return Response({"warnings": warnings}, status=status.HTTP_200_OK)
         
         return Response(weather_data)
