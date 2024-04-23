@@ -27,5 +27,25 @@ class WeatherAPIView(APIView):
         }
         serializer = WeatherDataSerializer(data=weather_data)
         serializer.is_valid(raise_exception=True)
+    def post(self, request):
+        serializer = WeatherDataSerializer(data=request.data)
+        if serializer.is_valid():
+            data = serializer.validated_data
+            warnings = []
+
+            # Kiểm tra nhiệt độ
+            if data['temperature'] > 35:
+                warnings.append("Cảnh báo: Nhiệt độ cao.")
+            elif data['temperature'] < 5:
+                warnings.append("Cảnh báo: Nhiệt độ thấp.")
+
+            # Kiểm tra độ ẩm
+            if data['humidity'] > 80:
+                warnings.append("Cảnh báo: Độ ẩm cao.")
+
+            # Kiểm tra tốc độ gió
+
+            return Response({"warnings": warnings}, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
         return Response(weather_data)
