@@ -39,11 +39,9 @@ class WeatherAPIView(APIView):
             elif data['temperature'] < 5:
                 warnings.append("Cảnh báo: Nhiệt độ thấp.")
 
-            # Kiểm tra độ ẩm
             if data['humidity'] > 80:
                 warnings.append("Cảnh báo: Độ ẩm cao.")
 
-            # Kiểm tra tốc độ gió
 
             return Response({"warnings": warnings}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
