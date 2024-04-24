@@ -9,6 +9,7 @@ from django.conf import settings
 
 class WeatherAPIView(APIView):
     def get(self, request):
+        load_dotenv()
         api_key = settings.API_KEYS.format( )
         city = 'Hanoi'
         url = settings.WEATHER_API_URL.format(city=city, api_key=api_key)
