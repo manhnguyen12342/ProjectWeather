@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,10 +26,11 @@ SECRET_KEY = 'django-insecure-e-plo7u@jipap&puo=-)(2(b4s=pzoe_67gu^6zr@9!4%p+l7)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+load_dotenv()
 
 ALLOWED_HOSTS = []
-WEATHER_API_URL = 'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric'
-API_KEYS = '909371832c6e088cee2b8ae9553bb388'
+WEATHER_API_URL = os.getenv("WEATHER_API_URL")
+API_KEYS = os.getenv("API_KEYS")
 # Application definition
 
 INSTALLED_APPS = [
