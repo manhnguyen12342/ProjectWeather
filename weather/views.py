@@ -6,13 +6,14 @@ import requests
 import os
 from dotenv import load_dotenv
 from django.conf import settings
+import const
 
 class WeatherAPIView(APIView):
     def get(self, request):
         load_dotenv()
-        api_key = settings.API_KEYS.format("API_KEYS")
-        city = 'Hanoi'
-        url = settings.WEATHER_API_URL.format("WEATHER_API_URL")
+        api_key = os.getenv("API_KEYS")
+        city = const.My_CONSTANT
+        url = settings.WEATHER_API_URL.format(city=city,api_key=api_key)
         
         response = requests.get(url)
         data = response.json()
@@ -30,16 +31,16 @@ class WeatherAPIView(APIView):
         
         return Response(weather_data)
     
-    def get_warning(self, request):
-        weather_data = WeatherData.objects.all()
-        if weather_data['temperature'] > 30  :
-            return Response({'message': 'Temperature high'})
-        elif weather_data['humidty'] >80:
-            return Response({'message': 'Wet'})
-        elif weather_data['temperature']<29:
-            return Response({'message': 'Temperature high'})
-        elif weather_data['humidty']<80 :
-            return Response({'message': 'Dry'})
-        else:
-          return Response(weather_data)
+    # def get_warning(self, request):
+    #     weather_data = WeatherData.objects.all()
+    #     if weather_data['temperature'] > 30  :
+    #         return Response({'message': 'Temperature high'})
+    #     elif weather_data['humidty'] >80:
+    #         return Response({'message': 'Wet'})
+    #     elif weather_data['temperature']<29:
+    #         return Response({'message': 'Temperature high'})
+    #     elif weather_data['humidty']<80 :
+    #         return Response({'message': 'Dry'})
+    #     else:
+    #       return Response(weather_data)
  
