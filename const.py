@@ -1,1 +1,1 @@
-My_CONSTANT="Hanoi"
+Hanoi_Location="Hanoi"
