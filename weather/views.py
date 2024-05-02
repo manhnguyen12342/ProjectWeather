@@ -27,18 +27,3 @@ def post(self, request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
-    
-    
-    # def get_warning(self, request):
-    #     weather_data = WeatherData.objects.all()
-    #     if weather_data['temperature'] > 30  :
-    #         return Response({'message': 'Temperature high'})
-    #     elif weather_data['humidty'] >80:
-    #         return Response({'message': 'Wet'})
-    #     elif weather_data['temperature']<29:
-    #         return Response({'message': 'Temperature high'})
-    #     elif weather_data['humidty']<80 :
-    #         return Response({'message': 'Dry'})
-    #     else:
-    #       return Response(weather_data)
- 
