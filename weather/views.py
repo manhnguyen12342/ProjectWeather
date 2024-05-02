@@ -16,29 +16,24 @@ class WeatherAPIView(APIView):
         response = requests.get(url)
         data = response.json()
         
-        temperature = data['main']['temp']
-        humidity = data['main']['humidity'] 
+
         
-        weather_data = {
-            'city' : city,
-            'temperature': temperature,
-            'humidity': humidity,
-        }
-        serializer = WeatherDataSerializer(data=weather_data)
+        serializer = WeatherDataSerializer(data)
         serializer.is_valid(raise_exception=True)
+    
         
         return Response(serializer.data)
     
-    def get_warning(self, request):
-        weather_data = WeatherData.objects.all()
-        if weather_data['temperature'] > 30  :
-            return Response({'message': 'Temperature high'})
-        elif weather_data['humidty'] >80:
-            return Response({'message': 'Wet'})
-        elif weather_data['temperature']<29:
-            return Response({'message': 'Temperature high'})
-        elif weather_data['humidty']<80 :
-            return Response({'message': 'Dry'})
-        else:
-          return Response(weather_data)
+    # def get_warning(self, request):
+    #     weather_data = WeatherData.objects.all()
+    #     if weather_data['temperature'] > 30  :
+    #         return Response({'message': 'Temperature high'})
+    #     elif weather_data['humidty'] >80:
+    #         return Response({'message': 'Wet'})
+    #     elif weather_data['temperature']<29:
+    #         return Response({'message': 'Temperature high'})
+    #     elif weather_data['humidty']<80 :
+    #         return Response({'message': 'Dry'})
+    #     else:
+    #       return Response(weather_data)
  
