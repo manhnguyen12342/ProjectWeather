@@ -1,5 +1,5 @@
 
-from rest_framework import serializers
+from rest_framework import serializers,status
 
 class Location:
     def __init__(self, location_id, location_name, latitude, longitude):
@@ -30,11 +30,3 @@ class WeatherDataSerializer(serializers.Serializer):
     temperature = serializers.DecimalField(max_digits=10, decimal_places=2)
     air_quality = serializers.CharField(max_length=20)
     humidity = serializers.CharField(max_length=20)
-
-    def get_location(self, obj):
-        return {
-            'location_id': obj.location.location_id,
-            'location_name': obj.location.location_name,
-            'latitude': obj.location.latitude,
-            'longitude': obj.location.longitude
-        }

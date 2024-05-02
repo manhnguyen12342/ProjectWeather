@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializer import WeatherDataSerializer
+from .serializer import WeatherDataSerializer,status
 from .models import WeatherData
 import requests
 from django.conf import settings
@@ -15,14 +15,19 @@ class WeatherAPIView(APIView):
         
         response = requests.get(url)
         data = response.json()
-        
-
-        
-        serializer = WeatherDataSerializer(data)
+        serializer = WeatherDataSerializer(data=data)
         serializer.is_valid(raise_exception=True)
     
-        
         return Response(serializer.data)
+        
+def post(self, request):
+        serializer = WeatherDataSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+    
     
     # def get_warning(self, request):
     #     weather_data = WeatherData.objects.all()
