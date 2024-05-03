@@ -15,16 +15,36 @@ class WeatherAPIView(APIView):
             
             response = requests.get(url)
             data =response.json()
-            # serializer = WeatherDataSerializer(data)
-            # # # serializer.is_valid(raise_exception=True)
-            return Response(data)
+            ans={
+                "temperature":data["main"]["temp"],
+                "humidity":data["main"]["humidity"],
+                # "location":data["main"]["name"]
+                
+            }
+            serializer = WeatherDataSerializer(data=ans)
+            serializer.is_valid(raise_exception=True)
+            return Response(serializer.data)
         
         def post(self, request):
             
-            serializer = WeatherDataSerializer(request)
+            serializer = WeatherDataSerializer(data=request.d)
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+class Atherods(APIView):
+    def post(self, request):
+        serializer = WeatherDataSerializer(data=request.data)
+        if serializer.is_valid():
+            temperature = serializer.validated_data['temperature']
+            humidity = serializer.validated_data['humidity']
+    
+            if temperature > 20 or humidity > 0 :
+                return Response({"message": "Cảnh báo: Điều kiện thời tiết nguy hiểm!"}, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                return Response({"message": "Điều kiện thời tiết bình thường"}, status=status.HTTP_200_OK)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     
             

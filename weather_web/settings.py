@@ -31,10 +31,10 @@ load_dotenv()
 ALLOWED_HOSTS = []
 WEATHER_API_URL = os.getenv("WEATHER_API_URL")
 API_KEYS = os.getenv("API_KEYS")
-USER= os.getenv("USER")
-PASSWORD= os.getenv("PASSWORD")
 NAME = os.getenv("NAME")
-User=os.getenv("USER")
+USER = os.getenv("USER")
+PASSWORD = os.getenv("PASSWORD")
+
 # Application definition
 
 INSTALLED_APPS = [
