@@ -16,10 +16,11 @@ class WeatherAPIView(APIView):
             response = requests.get(url)
             data =response.json()
             # serializer = WeatherDataSerializer(data)
-            # # serializer.is_valid(raise_exception=True)
+            # # # serializer.is_valid(raise_exception=True)
             return Response(data)
         
         def post(self, request):
+            
             serializer = WeatherDataSerializer(request)
             serializer.is_valid(raise_exception=True)
             serializer.save()

@@ -12,5 +12,5 @@ class WeatherDataSerializer(serializers.Serializer):
     # location = serializers.SerializerMethodField()
     # datetime = serializers.DateTimeField()
     temperature = serializers.DecimalField(max_digits=10, decimal_places=2)
-    air_quality = serializers.CharField(max_length=20)
-    # humidity = serializers.CharField(max_length=20)
+    # air_quality = serializers.CharField(max_length=20)
+    humidity = serializers.CharField(max_length=20)
