@@ -24,17 +24,20 @@ class WeatherAPIView(APIView):
         return Response(serializer.data)
 
 
-class Atherods(APIView):
+class Weather_Altherods_View(APIView):
     def post(self, request):
         serializer = WeatherDataSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        temperature = serializer.validated_data['temperature']
-        humidity = serializer.validated_data['humidity']
-        if temperature > 20 or humidity > 0 :
-           warning_message = 'Threshold exceeded for weather parameters.'
+        serializer.save()
+        temperature = request.data.get('temperature')
+        humidity = request.data.get('humidity')
+        if temperature > 30:
+                warning = "High temperature warning!"
+        elif humidity > 80:
+                warning = "High humidity warning!"
         else:
-            warning_message = None
-        return Response({'warning': warning_message})
+                warning = None
+        return Response({"status": "Weather data recorded.", "warning": warning}, status=status.HTTP_201_CREATED)
     
             
             

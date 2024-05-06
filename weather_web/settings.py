@@ -31,9 +31,9 @@ load_dotenv()
 ALLOWED_HOSTS = []
 WEATHER_API_URL = os.getenv("WEATHER_API_URL")
 API_KEYS = os.getenv("API_KEYS")
-NAME = os.getenv("NAME")
-USER = os.getenv("USER")
-PASSWORD = os.getenv("PASSWORD")
+# NAME = os.getenv("NAME")
+# USER = os.getenv("USER")
+# PASSWORD = os.getenv("PASSWORD")
 
 # Application definition
 
@@ -85,15 +85,12 @@ WSGI_APPLICATION = 'weather_web.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME':os.getenv("NAME"),
-        'USER':os.getenv("USER"),
-        'PASSWORD':os.getenv("PASSWORD")
+        # 'NAME': os.getenv("NAME"),
+        # 'USER': os.getenv("USER"),
+        # 'PASSWORD': os.getenv("PASSWORD")
     }
 }
 
-
-# Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
