@@ -24,7 +24,7 @@ class WeatherAPIView(APIView):
         return Response(serializer.data)
 
 
-class Weather_Altherods_View(APIView):
+class Weather_Altherods_Viewgi(APIView):
     def post(self, request):
         serializer = WeatherDataSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
