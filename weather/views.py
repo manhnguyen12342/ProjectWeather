@@ -16,9 +16,9 @@ class WeatherAPIView(APIView):
             response = requests.get(url)
             data =response.json()
             ans={
+                "location":data["name"],
                 "temperature":data["main"]["temp"],
                 "humidity":data["main"]["humidity"],
-                # "location":data["main"]["name"]
                 
             }
             serializer = WeatherDataSerializer(data=ans)
@@ -27,7 +27,7 @@ class WeatherAPIView(APIView):
         
         def post(self, request):
             
-            serializer = WeatherDataSerializer(data=request.d)
+            serializer = WeatherDataSerializer(data=request.data)
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

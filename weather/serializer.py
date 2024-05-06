@@ -9,7 +9,7 @@ class LocationSerializer(serializers.Serializer):
 
 class WeatherDataSerializer(serializers.Serializer):
     # data_id = serializers.IntegerField()
-    # location = serializers.SerializerMethodField()
+    location = serializers.CharField()
     # datetime = serializers.DateTimeField()
     temperature = serializers.DecimalField(max_digits=10, decimal_places=2)
     # air_quality = serializers.CharField(max_length=20)
