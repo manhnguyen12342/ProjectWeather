@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializer import WeatherDataSerializer,status
-from .models import WeatherData
+from weather.serializer import WeatherDataSerializer,status
+from weather.models import WeatherData
 import requests
 from django.conf import settings
 import const
@@ -20,15 +20,9 @@ class WeatherAPIView(APIView):
             "temperature":data["main"]["temp"],
             "humidity":data["main"]["humidity"],
             }
-        serializer = WeatherDataSerializer(data=ans)
-        serializer.is_valid(raise_exception=True)
+        serializer = WeatherDataSerializer(ans)
         return Response(serializer.data)
-        
-    def post(self, request):
-        serializer = WeatherDataSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
 
 class Atherods(APIView):
     def post(self, request):
@@ -37,10 +31,10 @@ class Atherods(APIView):
         temperature = serializer.validated_data['temperature']
         humidity = serializer.validated_data['humidity']
         if temperature > 20 or humidity > 0 :
-                return Response({"message": "Cảnh báo: Điều kiện thời tiết nguy hiểm!"}, status=status.HTTP_400_BAD_REQUEST)
+           warning_message = 'Threshold exceeded for weather parameters.'
         else:
-                return Response({"message": "Điều kiện thời tiết bình thường"}, status=status.HTTP_200_OK)
-
+            warning_message = None
+        return Response({'warning': warning_message})
     
             
             
