@@ -22,7 +22,7 @@ class WeatherAPIView(APIView):
             "humidity":data["main"]["humidity"],
             }
         serializer = WeatherDataSerializer(ans)
-        return Response(data)
+        return Response(serializer.data)
 
 
 class Weather_Altherods_Viewgi(APIView):
