@@ -1,10 +1,11 @@
+import const
+import requests
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from weather.serializer import WeatherDataSerializer,status
 from weather.models import WeatherData
-import requests
 from django.conf import settings
-import const
+
 
 class WeatherAPIView(APIView):
     def get(self, request):
@@ -21,7 +22,7 @@ class WeatherAPIView(APIView):
             "humidity":data["main"]["humidity"],
             }
         serializer = WeatherDataSerializer(ans)
-        return Response(serializer.data)
+        return Response(data)
 
 
 class Weather_Altherods_Viewgi(APIView):
