@@ -20,9 +20,12 @@ class WeatherAPIView(APIView):
         if status ==200:
                 data = response.json()
                 result = {
+                "longitude":data["coord"]["lon"],
+                "latitude":data["coord"]["lat"],
                 "location": data.get("name"),
                 "temperature": data["main"]["temp"],
                 "humidity": data["main"]["humidity"],
+                "windspeed":data["wind"]["speed"],
                 }
                 response= WeatherDataSerializer(result)
                 return Response(response.data)
@@ -46,7 +49,5 @@ class Weather_Altherods_Viewgi(APIView):
         else:
                 warning = None
         return Response({"status": "Weather data recorded.", "warning": warning}, status=status.HTTP_201_CREATED)
-    
-            
-            
+
         
