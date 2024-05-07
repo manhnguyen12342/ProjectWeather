@@ -1,0 +1,1 @@
+HANOI_LOCATION="Hanoi"

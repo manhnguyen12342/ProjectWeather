@@ -6,11 +6,12 @@ class LocationSerializer(serializers.Serializer):
     location_name = serializers.CharField(max_length=100)
     latitude = serializers.DecimalField(max_digits=9, decimal_places=6)
     longitude = serializers.DecimalField(max_digits=9, decimal_places=6)
+    
 
 class WeatherDataSerializer(serializers.Serializer):
     # data_id = serializers.IntegerField()
     location = serializers.CharField()
     # datetime = serializers.DateTimeField()
-    temperature = serializers.DecimalField(max_digits=10, decimal_places=2)
+    temperature = serializers.FloatField()
     # air_quality = serializers.CharField(max_length=20)
-    humidity = serializers.CharField(max_length=20)
+    humidity = serializers.IntegerField()

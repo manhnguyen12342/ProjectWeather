@@ -1,5 +1,6 @@
-import const
+import constant
 import requests
+import serializers
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from weather.serializer import WeatherDataSerializer,status
@@ -11,19 +12,25 @@ class WeatherAPIView(APIView):
     def get(self, request):
             
         api_key = settings.API_KEYS
-        location = const.Hanoi_Location
+        location = constant.HANOI_LOCATION
         url = settings.WEATHER_API_URL.format(city=location,api_key=api_key)
             
-        response = requests.get(url)
-        data =  response.json()
-        ans = {
-            "location":data["name"],
-            "temperature":data["main"]["temp"],
-            "humidity":data["main"]["humidity"],
-            }
-        serializer = WeatherDataSerializer(ans)
-        return Response(serializer.data)
-
+        response = requests.get(url,timeout=1000)
+        status=response.status_code
+        if status ==200:
+                data = response.json()
+                result = {
+                "location": data.get("name"),
+                "temperature": data["main"]["temp"],
+                "humidity": data["main"]["humidity"],
+                }
+                response= WeatherDataSerializer(result)
+                return Response(response.data)
+        elif status==400:
+             raise serializers.ValidationError("Error URL")
+        else:
+             return serializers.ValidationError("Error code")
+            
 
 class Weather_Altherods_Viewgi(APIView):
     def post(self, request):
