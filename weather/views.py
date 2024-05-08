@@ -1,10 +1,9 @@
 import constant
 import requests
-import serializers
+from rest_framework import serializers
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from weather.serializer import WeatherDataSerializer, status
-from weather.models import WeatherData
+from weather.serializer import WeatherDataSerializer
 from django.conf import settings
 
 
@@ -16,7 +15,11 @@ class WeatherAPIView(APIView):
 
         response = requests.get(url, timeout=1)
         status_code = response.status_code
-        if status_code == 200:
+        if status_code == 400:
+            raise serializers.ValidationError("Error URL")
+        if status_code == 500:
+            raise serializers.ValidationError("Error code")
+        else:
             data = response.json()
             result = {
                 "longitude": data["coord"]["lon"],
@@ -28,7 +31,3 @@ class WeatherAPIView(APIView):
             }
             response = WeatherDataSerializer(result)
             return Response(response.data)
-        elif status_code == 400:
-            raise serializers.ValidationError("Error URL")
-        else:
-            return serializers.ValidationError("Error code")
