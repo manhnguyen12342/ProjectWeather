@@ -13,7 +13,7 @@ class WeatherAPIView(APIView):
         location = constant.HANOI_LOCATION
         url = settings.WEATHER_API_URL.format(city=location, api_key=api_key)
 
-        response = requests.get(url, timeout=1)
+        response = requests.get(url, timeout= (1, 5))
         status_code = response.status_code
         if status_code == 400:
             raise serializers.ValidationError("Error URL")
