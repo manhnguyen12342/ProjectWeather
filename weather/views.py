@@ -31,3 +31,4 @@ class WeatherAPIView(APIView):
             }
             response = WeatherDataSerializer(result)
             return Response(response.data)
+        
