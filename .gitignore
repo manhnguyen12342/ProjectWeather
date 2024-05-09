@@ -1,11 +1,3 @@
-# Bỏ qua tất cả các file .log
-*.log
-
-# Bỏ qua thư mục build
-/build/
-
-# Bỏ qua file config.json
-config.json
-
-# Bỏ qua tất cả các file có đuôi .tmp
-*.tmp
+env
+db.sqlite3
+__pycache__a

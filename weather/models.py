@@ -14,7 +14,3 @@ class WeatherData(models.Model):
     air_quality = models.CharField(max_length=20)
     humidity = models.CharField(max_length=20)
 
-# class AlertThresholds(models.Model):
-#     threshold_id = models.AutoField(primary_key=True)
-#     parameter_id = models.IntegerField()  # Assuming parameter_id is related to another model
-#     threshold_value = models.DecimalField(max_digits=10, decimal_places=2)
